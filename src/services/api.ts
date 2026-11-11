@@ -1,4 +1,5 @@
 import type { BookingItem, Room, User } from "../types";
+import { generateUUID } from "../utils/generateUUID";
 
 const base = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
@@ -95,7 +96,8 @@ export const api = {
     request<{ id: string }>("/bookings", {
       method: "POST",
       headers: {
-        "Idempotency-Key": crypto.randomUUID(),
+        // "Idempotency-Key": crypto.randomUUID(),
+        "Idempotency-Key": generateUUID(),
       },
       body: JSON.stringify(data),
     }),
