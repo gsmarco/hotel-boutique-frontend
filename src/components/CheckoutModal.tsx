@@ -220,6 +220,30 @@ export default function CheckoutModal({
                       <label>
                         Vencimiento ficticio (MM/AA)
                         <input
+                          type="text"
+                          value={expiration}
+                          inputMode="numeric"
+                          maxLength={5}
+                          autoComplete="off"
+                          placeholder="MM/AA"
+                          onChange={(e) => {
+                            const digits = e.target.value
+                              .replace(/\D/g, "")
+                              .slice(0, 4);
+
+                            const formatted =
+                              digits.length > 2
+                                ? `${digits.slice(0, 2)}/${digits.slice(2)}`
+                                : digits;
+
+                            setExpiration(formatted);
+                          }}
+                        />
+                      </label>
+
+                      {/* <label>
+                        Vencimiento ficticio (MM/AA)
+                        <input
                           value={expiration}
                           inputMode="numeric"
                           maxLength={5}
@@ -231,7 +255,7 @@ export default function CheckoutModal({
                             )
                           }
                         />
-                      </label>
+                      </label> */}
                       <label>
                         CVV ficticio
                         <input
